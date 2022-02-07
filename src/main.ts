@@ -26,7 +26,6 @@ const main = async () => {
   let container = new PIXI.Container();
   app.stage.addChild(container) ;
 
-  // let colorGradient = [0x8651bd,0x7b49b7,0x6f41b2,0x6339ac,0x5631a6,0x492aa1,0x3a239b,0x271c96];
   let colorGradient = [0x8651bd,0x7b49b7,0x6f41b2,0x6339ac,0x5631a6,0x492aa1,0x3a239b,0x271c96,0x3a239b,0x492aa1,0x5631a6,0x6339ac,0x6f41b2,0x7b49b7,0x8651bd];
   let gradIndex = 0; 
   let currWidth = screen.width;
@@ -42,11 +41,14 @@ const main = async () => {
   app.stage.addChild(draw);
   gradIndex++; 
   let bool = true
+
   while(bool){
+    // when to stop the whole loop 
     if (currWidth < (screen.width/50) ){
       bool = false
       break
     }
+    
     currHeight -=10;
     currWidth -=10;
     posiitonOne += 4;
@@ -56,15 +58,14 @@ const main = async () => {
     rect.drawRect(posiitonOne,positionTwo,currWidth,currHeight);
     app.stage.addChild(rect);
     gradIndex ++;
+    // making sure the gradient is repeating
     if(gradIndex == colorGradient.length){
       gradIndex = 0;
     }
   }
-  // Handle window resizing
+  // // Handle window resizing
   window.addEventListener('resize', (_e) => {
       app.renderer.resize(window.innerWidth, window.innerHeight);
-    //   sprite.x = window.innerWidth / 2 - sprite.width / 2;
-    //   sprite.y = window.innerHeight / 2 - sprite.height / 2;
     container.x = window.innerWidth/2;
     container.y = window.innerHeight/2;
   });
